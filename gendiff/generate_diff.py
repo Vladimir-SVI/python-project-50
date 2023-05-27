@@ -2,19 +2,15 @@ import json
 
 
 def generate_diff(file1, file2):
-
-
     def append_in_list(key, value):
-        if value == True:
+        if value is True:
             value = 'true'
-        if value == False:
+        if value is False:
             value = 'false'
         str_key_value = f'  {key}: {value}'
         work_list.append(str_key_value)
-    
 
     work_list = []
-
     with open(file1, "r") as f1:
         dict1 = json.load(f1)
     with open(file2, "r") as f2:
@@ -29,13 +25,13 @@ def generate_diff(file1, file2):
             append_in_list('- ' + i, dict1[i])
         if i in dict1_keys and i in dict2_keys:
             if dict1[i] == dict2[i]:
-                append_in_list(i, dict1[i])
+                append_in_list('  ' + i, dict1[i])
             else:
                 append_in_list('- ' + i, dict1[i])
                 append_in_list('+ ' + i, dict2[i])
         if i not in dict1_keys and i in dict2_keys:
             append_in_list('+ ' + i, dict2[i])
-            
+
     list_result = []
     work_list.insert(0, '{')
     for i in work_list:
@@ -44,4 +40,5 @@ def generate_diff(file1, file2):
     list_result.append('}')
 
     result = ''.join(list_result)
-    print(result)
+    return result 
+
