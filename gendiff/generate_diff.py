@@ -40,5 +40,5 @@ def generate_diff(file1, file2):
     list_result.append('}')
 
     result = ''.join(list_result)
-    return result 
+    return result
 
