@@ -41,4 +41,3 @@ def generate_diff(file1, file2):
 
     result = ''.join(list_result)
     return result
-
